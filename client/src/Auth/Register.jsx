@@ -3,9 +3,11 @@ import { Card, Typography, Form, Input, Button, Alert , Spin} from 'antd';
 import { Flex } from 'antd'; // Assuming Flex component is imported from Ant Design
 import { Link } from 'react-router-dom';
 import regiterimg from '../assets/registerimg.png';
+import useSignup from '../hooks/useSignup';
 const Register = () => {
+  const {loading, error, registerUser} = useSignup();
   const handleRegister = (values) => {
-    console.log(values);
+    registerUser(values);
   };
 
   return (
