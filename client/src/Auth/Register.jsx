@@ -72,12 +72,11 @@ const Register = () => {
                     ]}>
                     <Input.Password size='large' placeholder='Enter your Password Again'/>
                 </Form.Item>
-                {/* {error && <Alert description={error} type='error' showIcon closable className='alert'/>} */}
+                {error && <Alert description={error} type='error' showIcon closable className='alert'/>}
             <Form.Item>
-              <Button //type={'${loading ? '' : 'primary'}'}
+              <Button type={`${loading ? '' : 'primary'}`}
                htmlType='submit' size='large' className='btn-create'>
-                {/* {loading ? <spin/> : 'Create Account'} */}
-                Create Account
+                {loading ? <spin/> : 'Create Account'}
               </Button>
             </Form.Item>
             <Form.Item>

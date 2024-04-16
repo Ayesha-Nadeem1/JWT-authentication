@@ -2,23 +2,17 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { message } from 'antd';
 
-const useSignup = () => {
+const useLogin = () => {
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const registerUser = async (values) => {
-    try {
-      
-      if (values.password !== values.passwordConfirm) {
-        console.log(values);
-        throw new Error('Passwords do not match');
-    }    
-
+  const loginUser = async (values) => {
+    try {    
       setError(null);
       setLoading(true);
-
-      const res = await fetch('http://localhost:3000/api/auth/signup', {
+      console.log(values);
+      const res = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -28,11 +22,11 @@ const useSignup = () => {
 
       const data = await res.json();
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         // Assuming message is imported or defined somewhere
         message.success(data.message);
         login(data.token, data.user);
-      } else if (res.status === 400) {
+      } else if (res.status === 404) {
         setError(data.message);
       } else {
         // Assuming message is imported or defined somewhere
@@ -46,7 +40,7 @@ const useSignup = () => {
     }
   };
 
-  return { loading, error, registerUser };
+  return { loading, error, loginUser };
 };
 
-export default useSignup;
+export default useLogin;
